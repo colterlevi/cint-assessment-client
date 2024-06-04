@@ -28,7 +28,8 @@ const Header: React.FC = () => {
 
                             <div className="hidden sm:flex">
                                 <a
-                                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-red-600"
+                                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-semibold text-red-400
+                                            hover:text-white hover:bg-red-400 hover:shadow-md"
                                 >
                                 <Link to="/leaderboard">
                                     Leaderboard
