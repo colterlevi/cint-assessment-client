@@ -177,7 +177,7 @@ const Quiz: React.FC = () => {
 
         return (
             <div className="text-center">
-                <h1 className="text-2xl font-bold mb-4">Quiz Result</h1>
+                <h1 className="text-2xl font-bold mb-4 text-red-400">Quiz Result</h1>
                 <p>Your score: {result}%</p>
                 <div className="mt-4">
                     <input
@@ -189,7 +189,7 @@ const Quiz: React.FC = () => {
                     />
                     <button
                         type="button"
-                        className="p-2 bg-blue-500 text-white rounded"
+                        className="p-2 bg-red-400 text-white font-semibold rounded"
                         onClick={handleSubmit}
                     >
                         Submit Score
@@ -216,7 +216,7 @@ const Quiz: React.FC = () => {
                 </div>
                 <button
                     type="button"
-                    className="mt-2 py-1 px-2 bg-red-400 text-white rounded 
+                    className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
                     hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
                     onClick={handleNext}
                 >
