@@ -208,7 +208,7 @@ const Quiz: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="max-w-2xl mx-auto p-4"
             >
-            <h1 className="text-2xl font-bold mb-4">Question {currentQuestionIndex + 1}</h1>
+            <h1 className="text-2xl font-bold mb-4 text-red-400">Question {currentQuestionIndex + 1}</h1>
             <form>
                 <div className="mb-6">
                     <h2 className="text-xl mb-2">{he.decode(questions[currentQuestionIndex].question)}</h2>
@@ -216,7 +216,8 @@ const Quiz: React.FC = () => {
                 </div>
                 <button
                     type="button"
-                    className="mt-4 p-2 bg-blue-500 text-white rounded"
+                    className="mt-2 py-1 px-2 bg-red-400 text-white rounded 
+                    hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
                     onClick={handleNext}
                 >
                     {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
