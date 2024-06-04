@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import he from 'he';
+import { useLocation, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import he from 'he'
 
 type Question = {
     id: number;
@@ -14,6 +15,8 @@ type Question = {
 };
 
 const Quiz: React.FC = () => {
+    const location = useLocation();
+    const { difficulty } = useParams<{ difficulty: string }>();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -26,9 +29,11 @@ const Quiz: React.FC = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get<Question[]>('http://localhost:3000/questions');
-                const uniqueQuestions = getRandomQuestions(response.data, 10);
-                setQuestions(uniqueQuestions);
+                const response = await axios.get<Question[]>('http://localhost:3000/questions', {
+                    params: { difficulty },
+                });
+                const shuffledQuestions = getRandomQuestions(response.data, 10); // Adjust count as needed
+                setQuestions(shuffledQuestions);
                 setLoading(false);
             } catch (error) {
                 setError('Failed to fetch questions');
@@ -37,7 +42,7 @@ const Quiz: React.FC = () => {
         };
 
         fetchQuestions();
-    }, []);
+    }, [location.search, difficulty]);
 
     const getRandomQuestions = (questions: Question[], count: number): Question[] => {
         const questionMap: { [key: number]: Question } = {};

@@ -1,25 +1,47 @@
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
+    const navigate = useNavigate();
+
+    const handleStartQuiz = (difficulty: string) => {
+        navigate(`/quiz?difficulty=${difficulty}`);
+    };
 
     return(
         <motion.div 
-            className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-4"
+            className="text-center p-4"
             initial={{ opacity: 0, scale: .95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
             >
-            <Link to="/quiz" className="block p-6 bg-white rounded-lg shadow-lg text-center
-                hover:bg-red-400 hover:text-white 
-                hover:shadow-xl transition-shadow duration-300">
-                <h2 className="text-2xl font-bold">Take the Quiz</h2>
-            </Link>
-            <Link to="/leaderboard" className="block p-6 bg-white rounded-lg shadow-lg text-center 
-                hover:bg-red-400 hover:text-white 
-                hover:shadow-xl transition-shadow duration-300">
-                <h2 className="text-2xl font-bold">Leaderboard</h2>
-            </Link>
+            <h1 className="text-2xl font-bold mb-4">Choose Difficulty</h1>
+            <div className="flex justify-center mb-4">
+                <button
+                    className="mx-2 p-2 bg-red-400 text-white font-semibold rounded"
+                    onClick={() => handleStartQuiz('easy')}
+                >
+                    Easy
+                </button>
+                <button
+                    className="mx-2 p-2 bg-yellow-400 text-white font-semibold rounded"
+                    onClick={() => handleStartQuiz('medium')}
+                >
+                    Medium
+                </button>
+                <button
+                    className="mx-2 p-2 bg-green-400 text-white font-semibold rounded"
+                    onClick={() => handleStartQuiz('hard')}
+                >
+                    Hard
+                </button>
+                {/* <button
+                    className="mx-2 p-2 bg-blue-400 text-white font-semibold rounded"
+                    onClick={() => handleStartQuiz('any')}
+                >
+                    Any Difficulty
+                </button> */}
+            </div>
         </motion.div>
     )
 }
