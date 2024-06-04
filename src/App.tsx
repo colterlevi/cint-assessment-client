@@ -1,12 +1,12 @@
-import Quiz from "./components/Quiz"
+import React from 'react';
+import Quiz from './components/Quiz';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <>
-    <Quiz />
-    </>
-  )
-}
+    <div className="App">
+      <Quiz />
+    </div>
+  );
+};
 
-export default App
+export default App;
