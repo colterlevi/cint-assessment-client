@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import he from 'he';
+import { motion } from 'framer-motion';
 
 type Question = {
     id: number;
@@ -199,8 +200,15 @@ const Quiz: React.FC = () => {
     }
 
     return (
-        <div className="max-w-2xl mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Quiz</h1>
+        <motion.div
+            key={currentQuestionIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="max-w-2xl mx-auto p-4"
+            >
+            <h1 className="text-2xl font-bold mb-4">Question {currentQuestionIndex + 1}</h1>
             <form>
                 <div className="mb-6">
                     <h2 className="text-xl mb-2">{he.decode(questions[currentQuestionIndex].question)}</h2>
@@ -214,7 +222,7 @@ const Quiz: React.FC = () => {
                     {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
                 </button>
             </form>
-        </div>
+        </motion.div>
     );
 };
 
