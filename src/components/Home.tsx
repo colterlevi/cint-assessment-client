@@ -10,15 +10,15 @@ const Home: React.FC = () => {
 
     return(
         <motion.div 
-            className="text-center p-4"
+            className="text-center p-4 bg-white rounded-lg shadow-lg"
             initial={{ opacity: 0, scale: .95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
             >
-            <h1 className="text-2xl font-bold mb-4">Choose Difficulty</h1>
+            <h1 className="text-2xl font-bold mb-4">What Quiz Experience Do You Want?</h1>
             <div className="flex justify-center mb-4">
                 <button
-                    className="mx-2 p-2 bg-red-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-green-400 text-white font-semibold rounded"
                     onClick={() => handleStartQuiz('easy')}
                 >
                     Easy
@@ -30,7 +30,7 @@ const Home: React.FC = () => {
                     Medium
                 </button>
                 <button
-                    className="mx-2 p-2 bg-green-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-red-400 text-white font-semibold rounded"
                     onClick={() => handleStartQuiz('hard')}
                 >
                     Hard

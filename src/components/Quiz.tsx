@@ -27,12 +27,13 @@ const Quiz: React.FC = () => {
     const [submitted, setSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
-        const fetchQuestions = async () => {
+        const fetchQuestions = async (difficulty: string) => {
             try {
                 const response = await axios.get<Question[]>('http://localhost:3000/questions', {
                     params: { difficulty },
                 });
-                const shuffledQuestions = getRandomQuestions(response.data, 10); // Adjust count as needed
+                console.log(response);
+                const shuffledQuestions = getRandomQuestions(response.data, 10, difficulty); // Adjust count as needed
                 setQuestions(shuffledQuestions);
                 setLoading(false);
             } catch (error) {
@@ -41,12 +42,17 @@ const Quiz: React.FC = () => {
             }
         };
 
-        fetchQuestions();
-    }, [location.search, difficulty]);
+        const difficultyParam = new URLSearchParams(location.search).get('difficulty');
+        if (difficultyParam) {
+            fetchQuestions(difficultyParam);
+        }
+    }, [location.search]);
 
-    const getRandomQuestions = (questions: Question[], count: number): Question[] => {
+    const getRandomQuestions = (questions: Question[], count: number, difficulty: string): Question[] => {
+        // Filter questions by difficulty
+        const filteredQuestions = questions.filter(question => question.difficulty === difficulty);
         const questionMap: { [key: number]: Question } = {};
-        questions.forEach(question => {
+        filteredQuestions.forEach(question => {
             questionMap[question.id] = question;
         });
 
@@ -108,6 +114,8 @@ const Quiz: React.FC = () => {
             console.error('Failed to submit score:', error);
         }
     };
+
+    console.log(questions)
 
     const renderQuestionInput = (question: Question) => {
         switch (question.question_type) {
