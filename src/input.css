@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .quiz-container {
+            max-height: 400px;
+            width: 750px;
+            display: flex;
+        }
+}

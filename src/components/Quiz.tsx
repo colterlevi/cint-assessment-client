@@ -200,13 +200,14 @@ const Quiz: React.FC = () => {
     }
 
     return (
+        <div className='quiz-container'>
         <motion.div
             key={currentQuestionIndex}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="max-w-2xl mx-auto p-4"
+            className="w-full h-auto p-4 bg-white rounded-lg shadow-lg"
             >
             <h1 className="text-2xl font-bold mb-4 text-red-400">Question {currentQuestionIndex + 1}</h1>
             <form>
@@ -219,11 +220,12 @@ const Quiz: React.FC = () => {
                     className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
                     hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
                     onClick={handleNext}
-                >
+                    >
                     {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
                 </button>
             </form>
         </motion.div>
+        </div>
     );
 };
 

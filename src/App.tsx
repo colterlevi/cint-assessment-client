@@ -8,7 +8,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      <div className='flex items-center justify-center'>
+      <div className='m-10 flex items-center justify-center'>
         <Outlet />
       </div>
     </div>
