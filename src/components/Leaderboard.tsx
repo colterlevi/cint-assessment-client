@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useLoaderData } from 'react-router-dom';
 
 type User = {
     id: number;
@@ -7,8 +8,9 @@ type User = {
 };
 
 type LeaderboardProps = {
-    users: User[];
+    users: User[]
 };
+
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
     console.log(users)

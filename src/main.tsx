@@ -11,12 +11,6 @@ import Leaderboard from './components/Leaderboard';
 import './input.css';
 import Home from './components/Home';
 
-// Loader function to fetch users
-const fetchUsers = async () => {
-  const response = await axios.get('http://localhost:3000/users');
-  return response.data;
-};
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -32,11 +26,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'leaderboard',
-        element: <Leaderboard users={[]} />, // Default value; will be overridden by loader
         loader: async () => {
-          const users = await fetchUsers();
+          const response = await axios.get('http://localhost:3000/users');
+          const users = await response.data
+          console.log(users)
           return { users };
         },
+        element: <Leaderboard users={[]} />, // Default value; will be overridden by loader
       },
     ],
   },
