@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import he from 'he'
@@ -16,7 +16,6 @@ type Question = {
 
 const Quiz: React.FC = () => {
     const location = useLocation();
-    const { difficulty } = useParams<{ difficulty: string }>();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});

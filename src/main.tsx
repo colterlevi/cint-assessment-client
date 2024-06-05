@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
+  useRouteError
 } from 'react-router-dom';
 import axios from 'axios';
 import App from './App';
@@ -10,6 +11,17 @@ import Quiz from './components/Quiz';
 import Leaderboard from './components/Leaderboard';
 import './input.css';
 import Home from './components/Home';
+
+const ErrorBoundary: React.FC = () => {
+  const routeError = useRouteError();
+
+  if (routeError) {
+    console.error('Route error:', routeError);
+    return <h1>Something went wrong with the route.</h1>;
+  }
+
+  return null;
+}
 
 const router = createBrowserRouter([
   {
@@ -35,6 +47,7 @@ const router = createBrowserRouter([
         element: <Leaderboard users={[]} />, // Default value; will be overridden by loader
       },
     ],
+    errorElement: <ErrorBoundary />
   },
 ]);
 
