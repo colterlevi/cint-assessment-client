@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import he from 'he'
@@ -16,6 +16,7 @@ type Question = {
 
 const Quiz: React.FC = () => {
     const location = useLocation();
+    const navigate = useNavigate()
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -109,10 +110,13 @@ const Quiz: React.FC = () => {
                 user: { name, score: result }
             });
             setSubmitted(true);
+            // Redirect to results page after submitting
+            navigate('/results', { state: { questions, answers, result } });
         } catch (error) {
             console.error('Failed to submit score:', error);
         }
     };
+
 
     console.log(questions)
 
@@ -189,8 +193,8 @@ const Quiz: React.FC = () => {
 
         return (
             <div className="text-center">
-                <h1 className="text-2xl font-bold mb-4 text-red-400">Quiz Result</h1>
-                <p>Your score: {result}%</p>
+                <h1 className="text-2xl font-bold mb-4 text-red-400">Name Your Entry & Submit to See Reults</h1>
+                {/* <p>Your score: {result}%</p> */}
                 <div className="mt-4">
                     <input
                         type="text"

@@ -11,6 +11,7 @@ import Quiz from './components/Quiz';
 import Leaderboard from './components/Leaderboard';
 import './input.css';
 import Home from './components/Home';
+import Results from './components/Results';
 
 const ErrorBoundary: React.FC = () => {
   const routeError = useRouteError();
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: 'quiz',
         element: <Quiz />,
+      },
+      {
+        path: 'results',
+        element: <Results />,
       },
       {
         path: 'leaderboard',
