@@ -22,7 +22,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
     // Check if loader data exists and has the users property
     const displayUsers = loaderData && 'users' in loaderData ? loaderData.users : users;
 
-    console.log(displayUsers);
+    // Sort the users by score
+    const sortedUsers = displayUsers.slice().sort((a, b) => b.score - a.score);
+
     return (
         <div className="p-4">
             <h1 className="p-4 text-2xl font-bold mb-4 text-center bg-red-400 text-gray-100 rounded-lg">Leaderboard</h1>
@@ -34,7 +36,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {displayUsers.map((user) => (
+                    {sortedUsers.map((user) => (
                         <tr key={user.id}>
                             <td className="border-t py-2 px-4">{user.name}</td>
                             <td className="border-t py-2 px-4">{user.score}</td>
