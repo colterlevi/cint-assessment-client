@@ -116,8 +116,7 @@ const Quiz: React.FC = () => {
             console.error('Failed to submit score:', error);
         }
     };
-
-
+    
     console.log(questions)
 
     const renderQuestionInput = (question: Question) => {
