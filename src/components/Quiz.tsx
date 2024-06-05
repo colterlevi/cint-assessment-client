@@ -216,7 +216,7 @@ const Quiz: React.FC = () => {
     }
 
     return (
-        <div className='quiz-container'>
+        <div className='w-5/6'>
         <motion.div
             key={currentQuestionIndex}
             initial={{ opacity: 0, y: 20 }}
