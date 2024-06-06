@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: 'leaderboard',
         loader: async () => {
-          const response = await axios.get('http://localhost:3000/users');
+          const response = await axios.get('https://colters-quiz-api-6118b7b1799e.herokuapp.com/users');
           const users = await response.data
           console.log(users)
           return { users };

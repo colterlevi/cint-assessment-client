@@ -26,7 +26,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
     const sortedUsers = displayUsers.slice().sort((a, b) => b.score - a.score);
 
     return (
-        <div className="p-4">
+        <div className="p-4 bg-white rounded-lg shadow-md w-3/5">
             <h1 className="p-4 text-2xl font-bold mb-4 text-center bg-red-400 text-gray-100 rounded-lg">Leaderboard</h1>
             <table className="min-w-full bg-white">
                 <thead>

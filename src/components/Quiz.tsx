@@ -29,7 +29,7 @@ const Quiz: React.FC = () => {
     useEffect(() => {
         const fetchQuestions = async (difficulty: string) => {
             try {
-                const response = await axios.get<Question[]>('http://localhost:3000/questions', {
+                const response = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
                     params: { difficulty },
                 });
                 console.log(response);
@@ -106,7 +106,7 @@ const Quiz: React.FC = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:3000/users', {
+            await axios.post('https://colters-quiz-api-6118b7b1799e.herokuapp.com//users', {
                 user: { name, score: result }
             });
             setSubmitted(true);
