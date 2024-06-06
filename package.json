@@ -12,6 +12,7 @@
     "start": "serve -s dist"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.10",
     "he": "^1.2.0",
