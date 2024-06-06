@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import he from 'he'
+import he from 'he';
 
 type Question = {
     id: number;
@@ -16,7 +16,7 @@ type Question = {
 
 const Quiz: React.FC = () => {
     const location = useLocation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -24,6 +24,7 @@ const Quiz: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [name, setName] = useState<string>('');
+    const [difficulty, setDifficulty] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
@@ -32,7 +33,11 @@ const Quiz: React.FC = () => {
                 const response = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
                     params: { difficulty },
                 });
-                const shuffledQuestions = getRandomQuestions(response.data, 10, difficulty); // Adjust count as needed
+                const previouslyAskedQuestionIds = getPreviouslyAskedQuestionIds();
+                const filteredQuestions = response.data.filter(
+                    question => !previouslyAskedQuestionIds.includes(question.id)
+                );
+                const shuffledQuestions = getRandomQuestions(filteredQuestions, 10, difficulty); // Adjust count as needed
                 setQuestions(shuffledQuestions);
                 setLoading(false);
             } catch (error) {
@@ -44,6 +49,7 @@ const Quiz: React.FC = () => {
         const difficultyParam = new URLSearchParams(location.search).get('difficulty');
         if (difficultyParam) {
             fetchQuestions(difficultyParam);
+            setDifficulty(difficultyParam)
         }
     }, [location.search]);
 
@@ -105,15 +111,15 @@ const Quiz: React.FC = () => {
         setResult((correctAnswers / questions.length) * 100);
     };
 
-
     const handleSubmit = async () => {
         try {
-            await axios.post('https://colters-quiz-api-6118b7b1799e.herokuapp.com//users', {
+            await axios.post('https://colters-quiz-api-6118b7b1799e.herokuapp.com/users', {
                 user: { name, score: result }
             });
             setSubmitted(true);
             // Redirect to results page after submitting
-            navigate('/results', { state: { questions, answers, result } });
+            navigate('/results', { state: { questions, answers, result, difficulty } });
+            saveAskedQuestionIds();
         } catch (error) {
             console.error('Failed to submit score:', error);
         }
@@ -172,6 +178,17 @@ const Quiz: React.FC = () => {
         }
     };
 
+    const getPreviouslyAskedQuestionIds = (): number[] => {
+        const ids = localStorage.getItem('askedQuestionIds');
+        return ids ? JSON.parse(ids) : [];
+    };
+
+    const saveAskedQuestionIds = () => {
+        const askedQuestionIds = getPreviouslyAskedQuestionIds();
+        const newAskedQuestionIds = [...askedQuestionIds, ...questions.map(question => question.id)];
+        localStorage.setItem('askedQuestionIds', JSON.stringify(newAskedQuestionIds));
+    };
+
     if (loading) {
         return <div className="text-center text-gray-600 font-semibold text-2xl">Loading...</div>;
     }
@@ -216,30 +233,30 @@ const Quiz: React.FC = () => {
 
     return (
         <div className='w-5/6'>
-        <motion.div
-            key={currentQuestionIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="w-full h-auto p-4 bg-white rounded-lg shadow-lg"
+            <motion.div
+                key={currentQuestionIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-auto p-4 bg-white rounded-lg shadow-lg"
             >
-            <h1 className="text-2xl font-bold mb-4 text-red-400">Question {currentQuestionIndex + 1}</h1>
-            <form>
-                <div className="mb-6 text-gray-600">
-                    <h2 className="text-xl mb-2">{he.decode(questions[currentQuestionIndex].question)}</h2>
-                    {renderQuestionInput(questions[currentQuestionIndex])}
-                </div>
-                <button
-                    type="button"
-                    className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
+                <h1 className="text-2xl font-bold mb-4 text-red-400">Question {currentQuestionIndex + 1}</h1>
+                <form>
+                    <div className="mb-6 text-gray-600">
+                        <h2 className="text-xl mb-2">{he.decode(questions[currentQuestionIndex].question)}</h2>
+                        {renderQuestionInput(questions[currentQuestionIndex])}
+                    </div>
+                    <button
+                        type="button"
+                        className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
                     hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
-                    onClick={handleNext}
+                        onClick={handleNext}
                     >
-                    {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
-                </button>
-            </form>
-        </motion.div>
+                        {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
+                    </button>
+                </form>
+            </motion.div>
         </div>
     );
 };

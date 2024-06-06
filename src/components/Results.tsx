@@ -15,7 +15,7 @@ type Question = {
 const Results: React.FC = () => {
     const navigate = useNavigate()
     const location = useLocation();
-    const { questions, answers, result } = location.state || { questions: [], answers: {}, result: Number };
+    const { questions, answers, result, difficulty } = location.state || { questions: [], answers: {}, result: Number };
 
     const renderAnswer = (question: Question) => {
         const selectedAnswer = answers[question.id];
@@ -66,11 +66,18 @@ const Results: React.FC = () => {
                     <hr />
                 </div>
             ))}
-            <button 
-                type="button"
-                className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
-                    hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
-                onClick={()=> navigate('/')}>Try Again?</button>
+            <div className='flex'>
+                <button 
+                    type="button"
+                    className="mx-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
+                        hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
+                    onClick={() => navigate(`/quiz?difficulty=${difficulty}`)}>Try Again?</button>
+                <button 
+                    type="button"
+                    className="mx-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
+                        hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
+                    onClick={() => navigate('/')}>New Quiz</button>
+            </div>
         </motion.div>
     );
 };
