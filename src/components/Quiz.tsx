@@ -30,14 +30,30 @@ const Quiz: React.FC = () => {
     useEffect(() => {
         const fetchQuestions = async (difficulty: string) => {
             try {
-                const response = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
-                    params: { difficulty },
-                });
+                let questionsData = [];
+                if (difficulty === 'any') {
+                    const easyQuestions = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
+                        params: { difficulty: 'easy' },
+                    });
+                    const mediumQuestions = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
+                        params: { difficulty: 'medium' },
+                    });
+                    const hardQuestions = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
+                        params: { difficulty: 'hard' },
+                    });
+                    questionsData = [...easyQuestions.data, ...mediumQuestions.data, ...hardQuestions.data];
+                } else {
+                    const response = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
+                        params: { difficulty },
+                    });
+                    questionsData = response.data;
+                }
+
                 const previouslyAskedQuestionIds = getPreviouslyAskedQuestionIds();
-                const filteredQuestions = response.data.filter(
+                const filteredQuestions = questionsData.filter(
                     question => !previouslyAskedQuestionIds.includes(question.id)
                 );
-                const shuffledQuestions = getRandomQuestions(filteredQuestions, 10, difficulty); // Adjust count as needed
+                const shuffledQuestions = getRandomQuestions(filteredQuestions, 10); // Adjust count as needed
                 setQuestions(shuffledQuestions);
                 setLoading(false);
             } catch (error) {
@@ -47,17 +63,13 @@ const Quiz: React.FC = () => {
         };
 
         const difficultyParam = new URLSearchParams(location.search).get('difficulty');
-        if (difficultyParam) {
-            fetchQuestions(difficultyParam);
-            setDifficulty(difficultyParam)
-        }
+        fetchQuestions(difficultyParam || 'any');
+        setDifficulty(difficultyParam || 'any');
     }, [location.search]);
 
-    const getRandomQuestions = (questions: Question[], count: number, difficulty: string): Question[] => {
-        // Filter questions by difficulty
-        const filteredQuestions = questions.filter(question => question.difficulty === difficulty);
+    const getRandomQuestions = (questions: Question[], count: number): Question[] => {
         const questionMap: { [key: number]: Question } = {};
-        filteredQuestions.forEach(question => {
+        questions.forEach(question => {
             questionMap[question.id] = question;
         });
 
@@ -209,8 +221,7 @@ const Quiz: React.FC = () => {
 
         return (
             <div className="text-center">
-                <h1 className="text-2xl font-bold mb-4 text-red-400">Name Your Entry & Submit to See Reults</h1>
-                {/* <p>Your score: {result}%</p> */}
+                <h1 className="text-2xl font-bold mb-4 text-red-400">Name Your Entry & Submit to See Results</h1>
                 <div className="mt-4">
                     <input
                         type="text"
@@ -250,7 +261,7 @@ const Quiz: React.FC = () => {
                     <button
                         type="button"
                         className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
-                    hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
+                            hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
                         onClick={handleNext}
                     >
                         {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}

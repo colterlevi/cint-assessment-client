@@ -36,12 +36,12 @@ const Home: React.FC = () => {
                 >
                     Hard
                 </button>
-                {/* <button
+                <button
                     className="mx-2 p-2 bg-blue-400 text-white font-semibold rounded"
-                    onClick={() => navigate('quiz')}
+                        onClick={() => handleStartQuiz('any')}
                 >
-                    Any Difficulty
-                </button> */}
+                    Random
+                </button>
             </div>
             </div>
         </motion.div>
