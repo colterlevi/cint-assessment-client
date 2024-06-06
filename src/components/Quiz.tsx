@@ -32,7 +32,6 @@ const Quiz: React.FC = () => {
                 const response = await axios.get<Question[]>('https://colters-quiz-api-6118b7b1799e.herokuapp.com/questions', {
                     params: { difficulty },
                 });
-                console.log(response);
                 const shuffledQuestions = getRandomQuestions(response.data, 10, difficulty); // Adjust count as needed
                 setQuestions(shuffledQuestions);
                 setLoading(false);
@@ -119,8 +118,6 @@ const Quiz: React.FC = () => {
             console.error('Failed to submit score:', error);
         }
     };
-    
-    console.log(questions)
 
     const renderQuestionInput = (question: Question) => {
         switch (question.question_type) {

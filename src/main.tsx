@@ -46,7 +46,6 @@ const router = createBrowserRouter([
         loader: async () => {
           const response = await axios.get('https://colters-quiz-api-6118b7b1799e.herokuapp.com/users');
           const users = await response.data
-          console.log(users)
           return { users };
         },
         element: <Leaderboard users={[]} />, // Default value; will be overridden by loader
