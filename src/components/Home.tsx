@@ -15,9 +15,9 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
             >
-            <div className="flex flex-col justify-center items-center text-center p-4 bg-gray-50 rounded-lg shadow-lg w-3/5 h-3/5">
+            <div className="flex flex-col justify-center items-center text-center">
             <h1 className="text-2xl font-bold mb-4 text-gray-600">What Quiz Experience Do You Want?</h1>
-            <div className="flex space-between lg:flex-row md:flex-col mb-4 sm:flex sm:flex-col">
+            <div className="flex flex-row space-between mb-4">
                 <button
                     className="m-2 p-2 bg-green-400 text-white font-semibold rounded shadow-md"
                     onClick={() => handleStartQuiz('easy')}
