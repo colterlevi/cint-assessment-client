@@ -17,7 +17,7 @@ const Home: React.FC = () => {
             >
             <div className="flex flex-col justify-center items-center text-center p-4 bg-gray-50 rounded-lg shadow-lg w-3/5 h-3/5">
             <h1 className="text-2xl font-bold mb-4 text-gray-600">What Quiz Experience Do You Want?</h1>
-            <div className="flex space-between lg:flex-row md:flex-row mb-4 sm:flex sm:flex-col">
+            <div className="flex space-between lg:flex-row md:flex-col mb-4 sm:flex sm:flex-col">
                 <button
                     className="m-2 p-2 bg-green-400 text-white font-semibold rounded shadow-md"
                     onClick={() => handleStartQuiz('easy')}
