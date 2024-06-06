@@ -27,7 +27,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
 
     return (
         <motion.div 
-            className="p-4 bg-white rounded-lg shadow-md w-3/5"
+            className="p-4 bg-white rounded-lg shadow-md w-3/5 overflow-auto max-h-5/6"
             initial={{ opacity: 0, scale: .95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}

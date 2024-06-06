@@ -176,7 +176,7 @@ const Quiz: React.FC = () => {
     };
 
     if (loading) {
-        return <div className="text-center">Loading...</div>;
+        return <div className="text-center text-gray-600 font-semibold text-2xl">Loading...</div>;
     }
 
     if (error) {

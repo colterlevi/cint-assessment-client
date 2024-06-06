@@ -7,12 +7,16 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header />
-      <div className='mt-10 flex items-center justify-center'>
+    <div className="h-screen bg-gradient-to-br from-blue-100 to-white">
+      <div className='h-1/6'>
+        <Header />
+      </div>
+      <div className='mb-20 h-4/6 flex items-center justify-center'>
         <Outlet />
       </div>
-      <Footer />
+      <div className='h-8'>
+        <Footer />
+      </div>
     </div>
   );
 };

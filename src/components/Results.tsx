@@ -21,7 +21,12 @@ const Results: React.FC = () => {
         const correctAnswer = question.correct_answer;
 
         if (!selectedAnswer) {
-            return <span className="text-red-400">No answer selected</span>;
+            return (
+            <>
+                <span className="text-red-400">No answer selected</span>
+                <> (Correct Answer: <span className="text-green-400">{he.decode(correctAnswer)}</span>)</>
+            </>
+            )
         }
 
         const isCorrect =
@@ -48,7 +53,7 @@ const Results: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="container mx-auto mt-2 mb-10 p-4 bg-white rounded-lg shadow-md w-3/4"
+            className="container mx-auto mt-2 mb-10 p-4 bg-white rounded-lg shadow-md w-4/5 h-full overflow-auto"
             >
             <h1 className="text-3xl font-bold mb-4 text-red-400">Quiz Results</h1>
             <p className='text-2xl font-semibold mb-4 text-gray-600'>Score: {result}%</p>
