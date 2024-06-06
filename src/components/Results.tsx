@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import he from 'he';
 
@@ -13,6 +13,7 @@ type Question = {
 };
 
 const Results: React.FC = () => {
+    const navigate = useNavigate()
     const location = useLocation();
     const { questions, answers, result } = location.state || { questions: [], answers: {}, result: Number };
 
@@ -65,6 +66,11 @@ const Results: React.FC = () => {
                     <hr />
                 </div>
             ))}
+            <button 
+                type="button"
+                className="mt-2 py-1 px-2 bg-red-400 text-white font-semibold rounded 
+                    hover:bg-red-300 hover:shadow-xl transition-shadow duration-300"
+                onClick={()=> navigate('/')}>Try Again?</button>
         </motion.div>
     );
 };
