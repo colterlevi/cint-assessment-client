@@ -19,19 +19,19 @@ const Home: React.FC = () => {
             <h1 className="text-2xl font-bold mb-4 text-gray-600">What Quiz Experience Do You Want?</h1>
             <div className="flex justify-center mb-4">
                 <button
-                    className="mx-2 p-2 bg-green-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-green-400 text-white font-semibold rounded shadow-md"
                     onClick={() => handleStartQuiz('easy')}
                 >
                     Easy
                 </button>
                 <button
-                    className="mx-2 p-2 bg-yellow-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-yellow-400 text-white font-semibold rounded shadow-md"
                     onClick={() => handleStartQuiz('medium')}
                 >
                     Medium
                 </button>
                 <button
-                    className="mx-2 p-2 bg-red-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-red-400 text-white font-semibold rounded shadow-md"
                     onClick={() => handleStartQuiz('hard')}
                 >
                     Hard
