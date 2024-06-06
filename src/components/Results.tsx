@@ -51,12 +51,12 @@ const Results: React.FC = () => {
             className="container mx-auto mt-2 mb-10 p-4 bg-white rounded-lg shadow-md w-3/4"
             >
             <h1 className="text-3xl font-bold mb-4 text-red-400">Quiz Results</h1>
-            <p className='text-2xl font-semibold mb-4'>Score: {result}%</p>
+            <p className='text-2xl font-semibold mb-4 text-gray-600'>Score: {result}%</p>
             {questions.map((question: Question, index: number) => (
                 <div key={question.id} className="mb-4">
                     <h2 className='text-xl font-bold text-red-400'>Question {index + 1}</h2>
-                    <h2 className="text-lg mb-2">{he.decode(question.question)}</h2>
-                    <p>{renderAnswer(question)}</p>
+                    <h2 className="text-lg mb-2 text-gray-600">{he.decode(question.question)}</h2>
+                    <p className='text-gray-600'>{renderAnswer(question)}</p>
                     <hr />
                 </div>
             ))}

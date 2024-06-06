@@ -33,7 +33,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
             transition={{ duration: 1 }}
             >
             <h1 className="p-4 text-2xl font-bold mb-4 text-center bg-red-400 text-gray-100 rounded-lg">Leaderboard</h1>
-            <table className="min-w-full bg-white">
+            <table className="min-w-full bg-white text-gray-600">
                 <thead>
                     <tr>
                         <th className="py-2 px-4 bg-gray-100 text-left">Name</th>

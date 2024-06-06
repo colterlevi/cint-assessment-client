@@ -229,7 +229,7 @@ const Quiz: React.FC = () => {
             >
             <h1 className="text-2xl font-bold mb-4 text-red-400">Question {currentQuestionIndex + 1}</h1>
             <form>
-                <div className="mb-6">
+                <div className="mb-6 text-gray-600">
                     <h2 className="text-xl mb-2">{he.decode(questions[currentQuestionIndex].question)}</h2>
                     {renderQuestionInput(questions[currentQuestionIndex])}
                 </div>
