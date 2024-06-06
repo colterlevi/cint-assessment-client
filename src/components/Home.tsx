@@ -37,7 +37,7 @@ const Home: React.FC = () => {
                     Hard
                 </button>
                 <button
-                    className="mx-2 p-2 bg-blue-400 text-white font-semibold rounded"
+                    className="mx-2 p-2 bg-blue-400 text-white font-semibold rounded shadow-md"
                         onClick={() => handleStartQuiz('any')}
                 >
                     Random
