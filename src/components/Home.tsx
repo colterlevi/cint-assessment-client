@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
     return(
         <motion.div 
-            className="text-center p-4 bg-white rounded-lg shadow-lg"
+            className="text-center p-4 bg-white rounded-lg shadow-lg w-3/5"
             initial={{ opacity: 0, scale: .95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
