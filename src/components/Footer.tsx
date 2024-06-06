@@ -3,6 +3,8 @@ import viteLogo from '../assets/vite.svg';
 import railsLogo from '../assets/Ruby_On_Rails_Logo.svg'
 import typescriptLogo from '../assets/Typescript_logo_2020.svg'
 import framerLogo from '../assets/framer-motion.svg'
+import routerLogo from '../assets/react-router-mark-color.svg'
+import tailwindLogo from '../assets/Tailwind_CSS_Logo.svg'
 
 const Footer: React.FC = () => {
 
@@ -17,6 +19,9 @@ const Footer: React.FC = () => {
                     <a href="https://react.dev" target="_blank">
                         <img src={reactLogo} className='' alt="React logo" />
                     </a>
+                    <a href="https://react.dev" target="_blank">
+                        <img src={tailwindLogo} className='' alt="TailwindCSS logo" />
+                    </a>
                     <a href="https://rubyonrails.org" target="_blank">
                         <img src={railsLogo} className='' alt="Ruby on Rails logo" />
                     </a>
@@ -25,6 +30,9 @@ const Footer: React.FC = () => {
                     </a>
                     <a href="https://www.framer.com/motion" target="_blank">
                         <img src={framerLogo} className='' alt="Framer-Motion logo" />
+                    </a>
+                    <a href="https://reactrouter.com/en/main" target="_blank">
+                        <img src={routerLogo} className='' alt="React Router logo" />
                     </a>
                 </div>
             </div>

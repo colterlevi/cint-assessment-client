@@ -1,4 +1,4 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import { useLoaderData } from 'react-router-dom';
 
 type User = {
@@ -26,7 +26,12 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
     const sortedUsers = displayUsers.slice().sort((a, b) => b.score - a.score);
 
     return (
-        <div className="p-4 bg-white rounded-lg shadow-md w-3/5">
+        <motion.div 
+            className="p-4 bg-white rounded-lg shadow-md w-3/5"
+            initial={{ opacity: 0, scale: .95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            >
             <h1 className="p-4 text-2xl font-bold mb-4 text-center bg-red-400 text-gray-100 rounded-lg">Leaderboard</h1>
             <table className="min-w-full bg-white">
                 <thead>
@@ -44,7 +49,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </motion.div>
     );
 };
 

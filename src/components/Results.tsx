@@ -24,17 +24,23 @@ const Results: React.FC = () => {
             return <span className="text-red-400">No answer selected</span>;
         }
 
+        const isCorrect =
+            question.question_type === 'text'
+                ? selectedAnswer.toLowerCase() === correctAnswer.toLowerCase()
+                : selectedAnswer === correctAnswer;
+
         return (
             <>
-                <span className={selectedAnswer === correctAnswer ? "text-green-400" : "text-red-400"}>
+                <span className={isCorrect ? "text-green-400" : "text-red-400"}>
                     {he.decode(selectedAnswer)}
                 </span>
-                {selectedAnswer !== correctAnswer && (
+                {!isCorrect && (
                     <> (Correct Answer: <span className="text-green-400">{he.decode(correctAnswer)}</span>)</>
                 )}
             </>
         );
     };
+
 
     return (
         <motion.div 
@@ -42,7 +48,7 @@ const Results: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="container mx-auto my-2 p-4 bg-white rounded-lg shadow-md"
+            className="container mx-auto mt-2 mb-10 p-4 bg-white rounded-lg shadow-md w-3/4"
             >
             <h1 className="text-3xl font-bold mb-4 text-red-400">Quiz Results</h1>
             <p className='text-2xl font-semibold mb-4'>Score: {result}%</p>

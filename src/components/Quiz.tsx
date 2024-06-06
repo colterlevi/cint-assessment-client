@@ -99,10 +99,13 @@ const Quiz: React.FC = () => {
 
     const calculateResult = () => {
         const correctAnswers = questions.filter(
-            question => answers[question.id] === question.correct_answer
+            question => question.question_type === 'text'
+                ? answers[question.id]?.toLowerCase() === question.correct_answer.toLowerCase()
+                : answers[question.id] === question.correct_answer
         ).length;
         setResult((correctAnswers / questions.length) * 100);
     };
+
 
     const handleSubmit = async () => {
         try {
